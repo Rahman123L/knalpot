@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splash Screen</title>
+    <link href="images/bg.png" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.13/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js" defer></script>
+
+    <script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#4E5CFF',
+                    secondary: '',
+                    tertiary: '',
+                },
+                keyframes: {
+                    fadeIn: {
+                        '0%': { opacity: 0 },
+                        '100%': { opacity: 1 },
+                    },
+                },
+                animation: {
+                    fadeIn: "fadeIn 2s forwards",
+                },
+            },
+        },
+    };
+    </script>
+
+</head>
+<body class="bg-white">
+    <img class="absolute top-0 left-0 -z-10 w-fit h-fit object-cover" src="/imgs/vektor1.png" alt="vektor1">
+    <nav class="w-[80%] mx-auto flex justify-between items-center gap-3 p-3 border-b-[1.5px] border-black/60">
+        <div class="bg-[#434343] p-5 rounded-lg"></div>
+        <div class="bg-[#FF0000] py-2 px-6 rounded-lg">
+            <h1 class="text-white text-xs md:text-sm font-medium">Login</h1>
+        </div>
+    </nav>
+    <section class="w-[80%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-2 p-3">
+        <div class="flex justify-center items-center">
+            <div class="space-y-3">
+                <h1 class="text-[#FF0000] text-2xl md:text-3xl font-bold">Tingkatkan <span class="text-white text-sm md:text-base font-bold">Performa</span><br> Dan Gaya <span class="text-white text-sm md:text-base font-bold">Kendaraan</span></h1>
+                <p class="w-[70%] text-white text-xs md:text-sm font-normal">Temukan knalpot terbaik yang dirancang untuk memberikan performa optimal, suara menggelegar, dan tampilan stylish pada kendaraan Anda.</p>
+                <button class="bg-transparent py-2 px-6 border-[1.5px] border-[#808080] rounded-lg">
+                    <h1 class="text-[#808080] text-xs md:text-sm font-medium">Tentang</h1>
+                </button>
+            </div>
+        </div>
+        <div class="hidden md:block relative">
+            <div class="absolute inset-0 flex justify-center items-center">
+                <img class="w-[60%] h-[60%] object-cover" src="/imgs/bg1.png" alt="bg1">
+            </div>
+            <img class="w-full md:w-fit h-full md:h-fit object-cover" src="/imgs/vektor2.png" alt="vektor2">
+        </div>
+    </section>
+    <section class="bg-[#232323] p-3">
+        <div class="w-[80%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-2">
+            <div class="relative pt-5">
+                <div class="absolute inset-0 place-content-center">
+                    <img class="w-[80%] sm:w-[60%] h-[80%] sm:h-[60%] object-cover mx-auto" src="/imgs/bg2.png" alt="bg1">
+                </div>
+                <img class="w-[80%] sm:w-fit h-full sm:h-fit object-cover mx-auto" src="/imgs/vektor3.png" alt="vektor2">
+            </div>
+            <div class="flex justify-center items-center">
+                <div class="space-y-3">
+                    <div class="w-fit">
+                        <h1 class="text-[#FF0000] text-2xl md:text-3xl font-bold">Exhaust <span class="text-white text-sm md:text-base font-bold">VOCA</span></h1>
+                        <h2 class="text-white text-sm md:text-base font-bold">Sabotage V2 50/70cc</h2>
+                    </div>
+                    <p class="text-white text-xs md:text-sm font-normal">Rasakan ledakan performa dengan VOCA Sabotage V2, knalpot racing yang dirancang khusus untuk mesin 50cc hingga 70cc. Dengan desain agresif dan teknologi high-performance, knalpot ini memberikan pembuangan gas yang optimal, suara khas racing yang tajam, dan peningkatan tenaga yang signifikan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="bg-[#232323] p-3 py-10 space-y-5">
+        <h1 class="text-center text-white text-xl md:text-3xl font-bold">Rekomendasi</h1>
+        <div class="flex justify-center items-center">
+            <div x-data="cardSlider()" class="w-[310px] md:w-[820px]">      
+                <div class="w-full flex">
+                    <button @click="prev()" :disabled="currentCard <= 0" class="disabled:opacity-50 disabled:cursor-not-allowed">
+                        <img class="w-[40px] h-[40px] object-cover" src="/svgs/arrow.svg" alt="arrow">
+                    </button>
+                    <div class="overflow-hidden w-full">
+                        <div class="flex transition-transform duration-500 ease-in-out mx-auto" :style="`transform: translateX(-${currentCard * 250}px)`">
+                            <template x-for="(card, index) in cards" :key="index">
+                                <div class="w-[250px] h-[260px] flex-shrink-0 bg-white text-black rounded-lg p-3 flex flex-col items-center justify-start gap-2 transition-all duration-300"
+                                    :class="{
+                                    'scale-100 z-20': index === currentCard + 1,
+                                    'scale-90 z-10 md:opacity-80': index === currentCard || index === currentCard + 2,
+                                    'opacity-0 pointer-events-none scale-75': index < currentCard || index > currentCard + 2 }">
+                                    <div class="space-y-2">
+                                        <img :src="card.image" alt="" class="w-full h-[100px] object-cover">
+                                        <h1 class="text-center text-black text-xs md:text-sm font-semibold" x-text="card.title"></h1>
+                                        <p class="line-clamp-4 text-black text-[10px] md:text-xs font-normal" x-text="card.description"></p>
+                                        <h2 class="text-start text-[#E53737] text-xs md:text-sm font-bold" x-text="card.price"></h2>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <button @click="next()" :disabled="currentCard >= cards.length - 3" class="disabled:opacity-50 disabled:cursor-not-allowed">
+                        <img class="w-[40px] h-[40px] object-cover rotate-180" src="/svgs/arrow.svg" alt="arrow">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="relative bg-[#232323]">
+        <div class="absolute z-10 inset-0 place-content-center">
+            <div class="w-[80%] flex justify-between items-center gap-3 mx-auto">
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="bg-[#D9D9D9] p-4 rounded-full"></div>
+                        <h1 class="text-[#FF0000] text-base md:text-lg font-bold">Knalpot Racing</h1>
+                    </div>
+                    <h1 class="text-white text-xs md:text-sm font-normal">knalpot terbaik yang dirancang untuk <br> memberikan performa optimal</h1>
+                    <div class="flex items-center gap-3">
+                        <div class="bg-[#D9D9D9] p-3 rounded-full"></div>
+                        <div class="bg-[#D9D9D9] p-3 rounded-full"></div>
+                        <div class="bg-[#D9D9D9] p-3 rounded-full"></div>
+                        <div class="bg-[#D9D9D9] p-3 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="hidden md:block bg-[#4E4E4E]/80 py-12 px-24 rounded-lg"></div>
+            </div>
+        </div>
+        <div class="w-full absolute inset-0 bg-black/60 mx-auto rounded-t-2xl"></div>
+        <img class="w-full h-[200px] object-cover mx-auto rounded-t-2xl" src="/imgs/bg6.jpg" alt="bg6">
+    </footer>
+
+    <script src="/js/slinder.js"></script>
+</body>
+</html>
