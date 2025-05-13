@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.13/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="dashboard.html" class="flex items-center">
+                        <span class="ml-2 text-xl font-bold text-gray-800">Knalpot Racing</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    
+                    <!-- User Profile -->
+                    <div class="relative" x-data="{ open: false }">
+                        <div class="flex items-center cursor-pointer" @click="open = !open">
+                            <div class="hidden md:block mr-5">
+                                <div class="text-end text-sm font-semibold text-gray-800">Sukma Indriya Wati</div>
+                                <div class="text-end text-xs text-gray-500">Sukma Indriya Wati@example.com</div>
+                            </div>
+                            <div class="avatar-text">S</div>
+                        </div>
+                        <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                            <div class="border-t border-gray-100"></div>
+                            <a href="index.html" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-0">
+                <div class="col-span-1 md:col-span-2 h-fit w-full md:w-[90%] bg-white rounded-lg shadow-md hover:shadow-xl overflow-hidden transition-all duration-300">
+                    <div class="h-48 bg-gray-200 relative overflow-hidden">
+                        <img src="/imgs/bg3.jpg" alt="R9 Racing Exhaust" class="w-full h-full object-cover">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white px-3 py-1 text-sm font-semibold">Top Rated</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="bg-red-500 py-1 px-3 rounded-full text-base text-white">R</div>
+                                <span class="text-sm text-gray-600 font-medium">R9 Racing Shop</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <img class="w-full h-10" src="/imgs/shopee.png">
+                                <img class="w-full h-10" src="/imgs/tokopedia.png">
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold">R9 Racing Full System</h3>
+                        <p class="text-gray-600 text-sm mb-2">High-performance full system exhaust for sport bikes. Titanium construction with carbon tip.</p>
+                        <div class="text-xl font-bold text-red-600 mb-2">Rp 3,500,000</div>
+                        <button class="bg-red-500 py-2 px-5 rounded">
+                            <h1 class="text-white text-xs md:text-sm font-medium">Beli Produk</h1>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-span-1 bg-white p-5 rounded-lg shadow-md hover:shadow-xl overflow-hidden transition-all duration-300">
+                    <!-- Brand Filter -->
+                    <div class="mb-2">
+                        <h3 class="text-lg font-semibold mb-2">Brand</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" disabled checked class="form-checkbox h-5 w-5 text-red-600">
+                                <span class="ml-2 text-gray-700">R9 Racing Exhaust</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Material Filter -->
+                    <div class="mb-2">
+                        <h3 class="text-lg font-semibold mb-2">Material</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" disabled checked class="form-checkbox h-5 w-5 text-red-600">
+                                <span class="ml-2 text-gray-700">Aluminium</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Motor Type Filter -->
+                    <div class="mb-2">
+                        <h3 class="text-lg font-semibold mb-2">Motor Type</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" disabled checked class="form-checkbox h-5 w-5 text-red-600">
+                                <span class="ml-2 text-gray-700">Sport</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Exhaust Type Filter -->
+                    <div class="mb-2">
+                        <h3 class="text-lg font-semibold mb-2">Exhaust Type</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" disabled checked class="form-checkbox h-5 w-5 text-red-600">
+                                <span class="ml-2 text-gray-700">Knalpot Standar Racing</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
