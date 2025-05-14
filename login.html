@@ -12,41 +12,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-300">
-    <div class="">
-        <img class="w-full h-52" src="/imgs/bg2.png" alt="backgroud">
-        <div class="relative z-10 bg-white p-6 rounded-t-3xl space-y-5 shadow-lg overflow-hidden">
-            <h1 class="text-center text-2xl text-gray-600 font-bold">Login</h1>
-            <form class="grid gap-y-4">
-                <label class="space-y-3">
-                    <h1 class="text-gray-700 text-sm font-bold">Username atau Email</h1>
-                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan nama pengguna atau email Anda">
-                </label>
-                
-                <label x-data="{ isOpen : false }" class="space-y-3">
-                    <h1 class="text-gray-700 text-sm font-bold">Password</h1>
-                    <div class="flex justify-between items-center gap-3 px-3 py-2 border border-gray-300 rounded-md">
-                        <input :type="isOpen ? 'text' : 'password'" type="password" class="w-full border-none focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan kata sandi Anda">
-                        <button type="button" @click="isOpen = !isOpen">
-                            <img x-show="!isOpen" class="w-6 h-6 object-cover" src="svgs/eye-on.svg" alt="eye-on">
-                            <img x-show="isOpen" class="w-6 h-6 object-cover" src="svgs/eye-off.svg" alt="eye-off">
-                        </button>
-                    </div>
-                </label>
-                
-                <div x-data="{ agreed: false }" class="space-y-3">
-                    <label class="flex items-center gap-2">
-                        <input type="checkbox" class="w-5 h-5 accent-red-600" x-model="agreed">
-                        <span class="text-gray-700">Saya setuju dengan syarat dan ketentuan</span>
-                    </label>
-
-                    <button type="submit" :class="agreed ? 'bg-red-600' : 'bg-gray-400 cursor-not-allowed'" class="w-full py-2 px-4 rounded-md transition-colors duration-200" :disabled="!agreed">
-                        <h1 class="text-white font-semibold">Login</h1>
+<body class="bg-white">
+    <img class="w-full h-52 bg-slate-500" src="/imgs/bg2.png" alt="backgroud">
+    <div class="relative z-10 bg-white p-6 -mt-3.5 rounded-t-3xl space-y-5 overflow-hidden">
+        <h1 class="text-center text-2xl text-gray-600 font-bold">Login</h1>
+        <form class="grid gap-y-4">
+            <label class="space-y-3">
+                <h1 class="text-gray-700 text-sm font-bold">Username atau Email</h1>
+                <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan nama pengguna atau email Anda">
+            </label>
+            
+            <label x-data="{ isOpen : false }" class="space-y-3">
+                <h1 class="text-gray-700 text-sm font-bold">Password</h1>
+                <div class="flex justify-between items-center gap-3 px-3 py-2 border border-gray-300 rounded-md">
+                    <input :type="isOpen ? 'text' : 'password'" type="password" class="w-full border-none focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan kata sandi Anda">
+                    <button type="button" @click="isOpen = !isOpen">
+                        <img x-show="!isOpen" class="w-6 h-6 object-cover" src="/svgs/eye-on.svg" alt="eye-on">
+                        <img x-show="isOpen" class="w-6 h-6 object-cover" src="/svgs/eye-off.svg" alt="eye-off">
                     </button>
                 </div>
-                
-                <h1 class="text-center text-gray-600">Tidak memiliki akun? <a href="register.html" class="text-red-600 hover:text-red-800">Register disini</a></h1>
-            </form>
+            </label>
+            
+            <div x-data="{ agreed: false }" class="space-y-3">
+                <label class="flex items-center gap-2">
+                    <input type="checkbox" class="w-5 h-5 accent-red-600" x-model="agreed">
+                    <span class="text-gray-700">Saya setuju dengan syarat dan ketentuan</span>
+                </label>
+
+                <button type="submit" :class="agreed ? 'bg-red-600' : 'bg-gray-400 cursor-not-allowed'" class="w-full py-2 px-4 rounded-md transition-colors duration-200" :disabled="!agreed">
+                    <h1 class="text-white font-semibold">Login</h1>
+                </button>
+            </div>
+            
+            <h1 class="text-center text-gray-600">Tidak memiliki akun? <a href="register.html" class="text-red-600 hover:text-red-800">Register disini</a></h1>
+        </form>
+    </div>
+
+    <div x-data="{ modal : true }" x-show="modal" x-transition.duration.300ms.opacity.50 :class="{ 'visible': modal, 'invisible': !modal }" class="invisible fixed inset-0 z-50 bg-[#0000006E] flex items-center justify-center h-screen">
+        <div class="w-[80%] sm:w-[50%] md:w-[35%] bg-white py-10 px-5 rounded-lg md:rounded-xl space-y-3">
+            <img class="w-12 mx-auto" src="/svgs/alert-warning.svg" alt="alert-warning">
+            <div class="text-center mx-10">
+                <h1 class="text-base md:text-lg text-[#4A4A4A] font-semibold">
+                    Password anda salah
+                </h1>
+            </div>
+            <div @click="modal = false" class="w-fit bg-[#F21E1EED] py-1.5 px-6 rounded mx-auto cursor-pointer">
+                <h1 class="text-xs md:text-sm text-white font-medium capitalize">Mengerti</h1>
+            </div>
         </div>
     </div>
     
