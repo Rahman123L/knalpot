@@ -12,80 +12,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-    <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="max-w-md w-full" x-data="{ 
-            username: '', 
-            password: '', 
-            agreed: false,
-            showError: false,
-            errorMessage: '',
-            validateForm() {
-                if (!this.username || !this.password) {
-                    this.showError = true;
-                    this.errorMessage = 'Please fill in all fields';
-                    return false;
-                }
-                return true;
-            }
-        }">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="bg-red-600 p-6">
-                    <h1 class="text-2xl font-bold text-white text-center">Login to Knalpot Racing</h1>
-                </div>
+<body class="bg-slate-300">
+    <div class="">
+        <img class="w-full h-52" src="/imgs/bg2.png" alt="backgroud">
+        <div class="relative z-10 bg-white p-6 rounded-t-3xl space-y-5 shadow-lg overflow-hidden">
+            <h1 class="text-center text-2xl text-gray-600 font-bold">Login</h1>
+            <form class="grid gap-y-4">
+                <label class="space-y-3">
+                    <h1 class="text-gray-700 text-sm font-bold">Username atau Email</h1>
+                    <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan nama pengguna atau email Anda">
+                </label>
                 
-                <!-- Alert for errors -->
-                <div x-show="showError" x-transition class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 mx-6 mt-6">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                        <span x-text="errorMessage">Error message</span>
+                <label x-data="{ isOpen : false }" class="space-y-3">
+                    <h1 class="text-gray-700 text-sm font-bold">Password</h1>
+                    <div class="flex justify-between items-center gap-3 px-3 py-2 border border-gray-300 rounded-md">
+                        <input :type="isOpen ? 'text' : 'password'" type="password" class="w-full border-none focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan kata sandi Anda">
+                        <button type="button" @click="isOpen = !isOpen">
+                            <img x-show="!isOpen" class="w-6 h-6 object-cover" src="svgs/eye-on.svg" alt="eye-on">
+                            <img x-show="isOpen" class="w-6 h-6 object-cover" src="svgs/eye-off.svg" alt="eye-off">
+                        </button>
                     </div>
+                </label>
+                
+                <div x-data="{ agreed: false }" class="space-y-3">
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" class="w-5 h-5 accent-red-600" x-model="agreed">
+                        <span class="text-gray-700">Saya setuju dengan syarat dan ketentuan</span>
+                    </label>
+
+                    <button type="submit" :class="agreed ? 'bg-red-600' : 'bg-gray-400 cursor-not-allowed'" class="w-full py-2 px-4 rounded-md transition-colors duration-200" :disabled="!agreed">
+                        <h1 class="text-white font-semibold">Login</h1>
+                    </button>
                 </div>
                 
-                <!-- Login Form -->
-                <div class="p-6">
-                    <form @submit.prevent="validateForm() && console.log('Form submitted')">
-
-                        <!-- Hapus ini -->
-                        <div class="flex justify-center items-center gap-5">
-                            <a href="admin.html">admin</a> |
-                            <a href="dashboard.html">user</a>
-                        </div>
-                        <!-- Hapus ini -->
-
-                        <div class="mb-4">
-                            <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username or Email</label>
-                            <input type="text" id="username" x-model="username" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder:font-normal" placeholder="Enter your username or email">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                            <input type="password" id="password" x-model="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent placeholder:font-normal" placeholder="Enter your password">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label class="flex items-center">
-                                <input type="checkbox" x-model="agreed" class="form-checkbox h-5 w-5 text-red-600">
-                                <span class="ml-2 text-gray-700">I agree to the terms and conditions</span>
-                            </label>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <button type="submit" x-bind:class="{'bg-red-600 hover:bg-red-700': agreed, 'bg-gray-400 cursor-not-allowed': !agreed}" class="w-full py-2 px-4 rounded-md text-white font-semibold transition-colors" x-bind:disabled="!agreed">
-                                Login
-                            </button>
-                        </div>
-                        
-                        <div class="text-center">
-                            <p class="text-gray-600">Don't have an account? <a href="register.html" class="text-red-600 hover:text-red-800">Register here</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                <h1 class="text-center text-gray-600">Tidak memiliki akun? <a href="register.html" class="text-red-600 hover:text-red-800">Register disini</a></h1>
+            </form>
         </div>
     </div>
     
