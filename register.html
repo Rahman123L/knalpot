@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Daftar</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.13/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js" defer></script>
@@ -12,98 +12,114 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-    <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="max-w-md w-full" x-data="{ 
-            username: '', 
-            name: '',
-            email: '',
-            password: '', 
-            confirmPassword: '',
-            agreed: false,
-            showError: false,
-            errorMessage: '',
-            validateForm() {
-                if (!this.username || !this.name || !this.email || !this.password || !this.confirmPassword) {
-                    this.showError = true;
-                    this.errorMessage = 'Please fill in all fields';
-                    return false;
-                }
-                if (this.password !== this.confirmPassword) {
-                    this.showError = true;
-                    this.errorMessage = 'Passwords do not match';
-                    return false;
-                }
-                return true;
-            }
-        }">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="bg-red-600 p-6">
-                    <h1 class="text-2xl font-bold text-white text-center">Create an Account</h1>
-                </div>
+<body class="bg-white">
+    <main class="md:flex md:justify-center md:items-center md:h-screen">
+        <div class="w-full sm:w-[80%] md:w-full md:p-10 md:grid md:grid-cols-2 md:gap-10 mx-auto">
+            <img class="sm:hidden w-full h-52 bg-slate-500" src="/imgs/bg2.png" alt="backgroud">
+            <div class="login-box relative z-10 w-full bg-white p-6 -mt-3.5 sm:mt-20 md:mt-0 md:shadow-[0_0_10px_rgba(0,0,0,0.2)] rounded-t-3xl sm:rounded-lg space-y-5 overflow-hidden">
+                <h1 class="text-center text-2xl text-gray-600 font-bold">Daftar</h1>
                 
-                <!-- Alert for errors -->
-                <div x-show="showError" x-transition class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 mx-6 mt-6">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                        <span x-text="errorMessage">Error message</span>
-                    </div>
-                </div>
-                
-                <!-- Registration Form -->
-                <div class="p-6">
-                    <form @submit.prevent="validateForm() && console.log('Form submitted')">
-                        <div class="mb-4">
-                            <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                            <input type="text" id="username" x-model="username" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Choose a username">
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Full Name</label>
-                            <input type="text" id="name" x-model="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Enter your full name">
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                            <input type="email" id="email" x-model="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Enter your email address">
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                            <input type="password" id="password" x-model="password" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Create a password">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="confirmPassword" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
-                            <input type="password" id="confirmPassword" x-model="confirmPassword" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent" placeholder="Confirm your password">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label class="flex items-center">
-                                <input type="checkbox" x-model="agreed" class="form-checkbox h-5 w-5 text-red-600">
-                                <span class="ml-2 text-gray-700">I agree to the terms and conditions</span>
-                            </label>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <button type="submit" x-bind:class="{'bg-red-600 hover:bg-red-700': agreed, 'bg-gray-400 cursor-not-allowed': !agreed}" class="w-full py-2 px-4 rounded-md text-white font-semibold transition-colors" x-bind:disabled="!agreed">
-                                Register
+                <!-- Start Form -->
+                <form class="grid gap-y-4">
+
+                    <!-- Nama -->
+                    <label class="space-y-3">
+                        <h1 class="text-gray-700 text-sm font-bold">Nama</h1>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Pilih nama pengguna">
+                    </label>
+
+                    <!-- Nama Lengkap -->
+                    <label class="space-y-3">
+                        <h1 class="text-gray-700 text-sm font-bold">Nama Lengkap</h1>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan nama lengkap Anda">
+                    </label>
+
+                    <!-- Email -->
+                    <label class="space-y-3">
+                        <h1 class="text-gray-700 text-sm font-bold">Email</h1>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Masukkan alamat email Anda">
+                    </label>
+                    
+                    <!-- Kata Sandi -->
+                    <label x-data="{ isOpen : false }" class="space-y-3">
+                        <h1 class="text-gray-700 text-sm font-bold">Kata Sandi</h1>
+                        <div class="flex justify-between items-center gap-3 px-3 py-2 border border-gray-300 rounded-md">
+                            <input :type="isOpen ? 'text' : 'password'" type="password" class="w-full border-none focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Buat kata sandi">
+                            <button type="button" @click="isOpen = !isOpen">
+                                <img x-show="!isOpen" class="w-6 h-6 object-cover" src="/svgs/eye-on.svg" alt="eye-on">
+                                <img x-show="isOpen" class="w-6 h-6 object-cover" src="/svgs/eye-off.svg" alt="eye-off">
                             </button>
                         </div>
-                        
-                        <div class="text-center">
-                            <p class="text-gray-600">Already have an account? <a href="login.html" class="text-red-600 hover:text-red-800">Login here</a></p>
+                    </label>
+
+                    <!-- Mengonfirmasi Kata Sandi -->
+                    <label x-data="{ isOpen : false }" class="space-y-3">
+                        <h1 class="text-gray-700 text-sm font-bold">Mengonfirmasi Kata Sandi</h1>
+                        <div class="flex justify-between items-center gap-3 px-3 py-2 border border-gray-300 rounded-md">
+                            <input :type="isOpen ? 'text' : 'password'" type="password" class="w-full border-none focus:outline-none ring-0 placeholder:text-sm placeholder:font-normal" placeholder="Konfirmasi kata sandi Anda">
+                            <button type="button" @click="isOpen = !isOpen">
+                                <img x-show="!isOpen" class="w-6 h-6 object-cover" src="/svgs/eye-on.svg" alt="eye-on">
+                                <img x-show="isOpen" class="w-6 h-6 object-cover" src="/svgs/eye-off.svg" alt="eye-off">
+                            </button>
                         </div>
-                    </form>
+                    </label>
+                    
+                    <!-- Checkbox -->
+                    <div x-data="{ agreed: false }" class="space-y-3">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="w-5 h-5 accent-red-600" x-model="agreed">
+                            <span class="text-gray-700">Saya setuju dengan syarat dan ketentuan</span>
+                        </label>
+
+                        <button type="submit" :class="agreed ? 'bg-red-600' : 'bg-gray-400 cursor-not-allowed'" class="w-full py-2 px-4 rounded-md transition-colors duration-200" :disabled="!agreed">
+                            <h1 class="text-white font-semibold">Daftar</h1>
+                        </button>
+                    </div>
+                    
+                    <!-- Teks -->
+                    <h1 class="text-center text-gray-600">Sudah memiliki akun? <a href="login.html" class="text-red-600 hover:text-red-800">Masuk disini</a></h1>
+                </form>
+                <!-- End Form -->
+
+            </div>
+            <img class="hidden md:block w-full h-full bg-cover md:shadow-[0_0_10px_rgba(0,0,0,0.2)] rounded-lg" src="/imgs/image.png" alt="image">
+        </div>
+
+        <!-- Start Alert -->
+        <div x-data="{ modal : false }" x-show="modal" x-transition.duration.300ms.opacity.50 :class="{ 'visible': modal, 'invisible': !modal }" class="invisible fixed inset-0 z-50 bg-[#0000006E] flex items-center justify-center h-screen">
+            <div class="w-[80%] sm:w-[50%] md:w-[35%] grid gap-y-2 bg-white py-10 px-5 rounded-lg md:rounded-xl">
+                <img class="w-12 mx-auto" src="/svgs/alert-warning.svg" alt="alert-warning">
+                <div class="text-center mx-10">
+                    <h1 class="text-lg md:text-xl text-[#4A4A4A] font-semibold">
+                        Password anda salah
+                    </h1>
+                </div>
+                <div @click="modal = false" class="w-fit bg-[#F21E1EED] py-1.5 px-6 mt-5 rounded mx-auto cursor-pointer">
+                    <h1 class="text-white font-medium capitalize">Mengerti</h1>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- End Alert -->
+    </main>
     
     <script src="/js/from.js"></script>
+    <script>
+        window.onload = () => {
+            gsap.from(".login-box", {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power2.out"
+            });
+
+            gsap.from(".login-box form *", {
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                delay: 0.5,
+                stagger: 0.1
+            });
+        };
+    </script>
 </body>
 </html>
